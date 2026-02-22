@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="google-site-verification" content="VD_9XcxWm8BFMFHoTDMDCk6qtZB3lh27JJ4M-G942b0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justfitcouture</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta name="description" content="Justfitcouture – Premium custom fashion brand in Abuja offering elegant, tailored designs.">
+<meta name="keywords" content="Justfitcouture, fashion designer Abuja, tailor Abuja, custom wear Nigeria">
+<meta name="author" content="Justfitcouture">
+</head>
+
+<div id="imgModal" class="img-modal">
+  <span onclick="closeImg()">×</span>
+  <img id="modalImg">
+</div>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="spinner"></div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo-area">
+    <img src="logo.png" alt="Justfitcouture Logo">
+    <h1>Justfitcouture</h1>
+  </div>
+
+  <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+
+  <nav id="nav-menu">
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#booking">Booking</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h2>Elegance • Timeless • Custom Fashion</h2>
+  <p>STYLING THE TREND</p>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section light">
+  <h2>About Justfitcouture</h2>
+  <p>
+    Justfitcouture is a premium fashion brand focused on elegant,
+    well-fitted designs crafted to reflect individuality and class.
+  </p>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section dark">
+  <h2>Gallery</h2>
+
+  <div class="gallery-grid">
+    <img src="image1.jpg">
+    <img src="image2.jpg">
+    <img src="image3.jpg">
+    <img src="image4.jpg">
+  </div>
+
+  <div class="gallery-grid hidden" id="moreImages">
+    <img src="image5.jpg">
+    <img src="image6.jpg">
+    <img src="image7.jpg">
+    <img src="image8.jpg">
+    <img src="image9.jpg">
+  </div>
+
+  <button class="view-more" onclick="toggleGallery()">View More</button>
+</section>
+
+<section class="section light" id="adminLogin">
+  <h2>Admin Login</h2>
+
+  <input type="password" id="adminPass" placeholder="Enter Admin Password">
+
+  <button onclick="adminLogin()">Login</button>
+</section>
+<!-- ADMIN UPLOAD PANEL -->
+<section class="section light" id="adminPanel" style="display:none;">
+  <h2>Admin Upload Panel</h2>
+
+  <input type="file" accept="image/*" multiple id="upload">
+
+  <div class="preview" id="preview"></div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking" class="section dark">
+  <h2>Book an Appointment</h2>
+
+  <a class="whatsapp-btn"
+     href="https://wa.me/2348036807780"
+     target="_blank">
+    <i class="fa-brands fa-whatsapp"></i> Book via WhatsApp
+  </a>
+</section>
+
+<form class="measure-form" onsubmit="sendToWhatsApp(event)">
+  <input id="name" type="text" placeholder="Full Name" required>
+  <input id="phone" type="tel" placeholder="Phone Number" required>
+
+  <div class="measure-grid">
+    <input id="bust" type="number" placeholder="Bust (inches)">
+    <input id="waist" type="number" placeholder="Waist (inches)">
+    <input id="hip" type="number" placeholder="Hip (inches)">
+    <input id="shoulder" type="number" placeholder="Shoulder">
+    <input id="sleeve" type="number" placeholder="Sleeve Length">
+    <input id="length" type="number" placeholder="Full Length">
+  </div>
+
+  <textarea id="note" placeholder="Additional Notes"></textarea>
+
+  <button type="submit">Send to WhatsApp</button>
+</form>
+
+<!-- CONTACT -->
+<section id="contact" class="section light">
+  <h2>Contact Us</h2>
+
+  <p><i class="fa-solid fa-location-dot"></i> Lokogoma, Abuja</p>
+  <p><i class="fa-solid fa-phone"></i> +234 803 680 7780</p>
+  <p><i class="fa-solid fa-envelope"></i> justfitcouture@gmail.com</p>
+
+  <div class="socials">
+    <a href="#"><i class="fa-brands fa-tiktok"></i> just.fit.couture</a>
+    <a href="#"><i class="fa-brands fa-instagram"></i> @JUSTFITCOUTURE</a>
+    <a href="#"><i class="fa-brands fa-facebook"></i> @Justfitcouture</a>
+  </div>
+</section>
+
+<section class="section dark">
+  <h2>Instagram Feed</h2>
+
+  <div class="instagram-embed">
+    <iframe 
+      src="https://www.instagram.com/justfitcouture/embed"
+      frameborder="0"
+      scrolling="no"
+      allowtransparency="true">
+    </iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Justfitcouture. All Rights Reserved.</p>
+</footer>
+
+<script>
+/* LOADER */
+window.onload = () => {
+  document.getElementById("loader").style.display = "none";
+};
+
+/* MENU */
+function toggleMenu() {
+  document.getElementById("nav-menu").classList.toggle("show");
+  document.getElementById("menuToggle").classList.toggle("active");
+}
+
+/* VIEW MORE */
+function toggleGallery() {
+  document.getElementById("moreImages").classList.toggle("hidden");
+}
+
+/* ADMIN PREVIEW */
+document.getElementById("upload").addEventListener("change", function () {
+  const preview = document.getElementById("preview");
+  preview.innerHTML = "";
+  [...this.files].forEach(file => {
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(file);
+    preview.appendChild(img);
+  });
+});
+
+/* CUSTOM CURSOR */
+const cursor = document.querySelector(".cursor");
+document.addEventListener("mousemove", e => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
+
+function sendToWhatsApp(e) {
+  e.preventDefault();
+
+  const msg =
+`MEASUREMENTS FROM WEBSITE
+
+Name: ${name.value}
+Phone: ${phone.value}
+
+Bust: ${bust.value}
+Waist: ${waist.value}
+Hip: ${hip.value}
+Shoulder: ${shoulder.value}
+Sleeve: ${sleeve.value}
+Length: ${length.value}
+
+Notes: ${note.value}`;
+
+  window.open(
+    `https://wa.me/2348036807780?text=${encodeURIComponent(msg)}`,
+    "_blank"
+  );
+}
+
+document.querySelectorAll(".gallery-grid img").forEach(img => {
+  img.onclick = () => {
+    modalImg.src = img.src;
+    imgModal.style.display = "flex";
+  };
+});
+
+function closeImg() {
+  imgModal.style.display = "none";
+}
+
+function adminLogin() {
+  if (adminPass.value === "justfit2026") {
+    document.getElementById("adminLogin").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+  } else {
+    alert("Wrong password");
+  }
+}
+</script>
+
+</body>
+</html>
